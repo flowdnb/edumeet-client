@@ -6,7 +6,7 @@ import TextInputField from '../../components/textinputfield/TextInputField';
 import { joinLabel, roomNameLabel, imprintLabel, privacyLabel } from '../../components/translated/translatedComponents';
 import GenericDialog from '../../components/genericdialog/GenericDialog';
 import StyledBackground from '../../components/StyledBackground';
-import PrecallTitle from '../../components/precalltitle/PrecallTitle';
+import LandingPageTitle from '../../components/precalltitle/LandingPageTitle';
 import { QRCode } from 'react-qrcode-logo';
 import edumeetConfig from '../../utils/edumeetConfig';
 
@@ -24,7 +24,7 @@ const LandingPage = (): JSX.Element => {
 		<StyledBackground>
 			<GenericDialog
 				showFooter={true}
-				title={ <PrecallTitle /> }
+				title={ <LandingPageTitle /> }
 				content={
 					<Container style={{ textAlign: 'center' }}>
 						{qrCodeEnabled && <QRCode value={`${window.location.protocol}//${window.location.hostname }/${roomId}`} />}
