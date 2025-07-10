@@ -97,6 +97,8 @@ export declare interface MediaService {
 	on(event: 'transcript', listener: (transcription: PeerTranscript) => void): this;
 	// eslint-disable-next-line no-unused-vars
 	on(event: 'lostMediaServer', listener: () => void): this;
+	// eslint-disable-next-line no-unused-vars
+	on(event: 'reaction', listener: (peerId: string, reactionId: string) => void): this;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
@@ -559,7 +561,14 @@ export class MediaService extends EventEmitter {
 
 									break;
 								}
+							case 'reaction': {
+								const { reactionId } = data;
 
+								if (reactionId) {
+									this.emit('reaction', peerId, reactionId);
+								}
+								break;
+							}
 								default: {
 									logger.warn('unknown dataConsumer method "%s"', method);
 								}
@@ -1003,5 +1012,40 @@ export class MediaService extends EventEmitter {
 		this.speechRecognition = undefined;
 
 		this.emit('transcriptionStopped');
+	}
+
+	public async sendReaction(reactionId: string): Promise<void> {
+		logger.debug('sendReaction() [reactionId:%s]', reactionId);
+
+		let reactionDataProducer = this.dataProducers.get('reaction');
+
+		if (!reactionDataProducer) {
+			try {
+				reactionDataProducer = await this.produceData({
+					ordered: false, // Reactions don't strictly need to be ordered
+					maxPacketLifeTime: 5000, // Allow some time for delivery
+					label: 'reaction', // Label for this DataProducer
+					appData: {
+						// Optional: any app-specific data for this producer
+					}
+				});
+				this.dataProducers.set('reaction', reactionDataProducer); // Store it if we want to reuse
+			} catch (error) {
+				logger.error('Failed to create reaction DataProducer [error:%o]', error);
+				return;
+			}
+		}
+
+		const message = JSON.stringify({
+			method: 'reaction',
+			data: { reactionId }
+		});
+
+		try {
+			reactionDataProducer.send(message);
+		} catch (error) {
+			logger.error('Failed to send reaction message [error:%o]', error);
+			// Optional: Could try to recreate DataProducer if send fails
+		}
 	}
 }

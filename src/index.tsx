@@ -5,6 +5,7 @@ import { RawIntlProvider } from 'react-intl';
 import './index.css';
 import debug from 'debug';
 import { persistor, store, mediaService, fileService, ServiceContext } from './store/store';
+(globalThis as any).store = store; // Expose store globally for reactionsMiddleware
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';

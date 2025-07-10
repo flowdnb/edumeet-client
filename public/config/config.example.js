@@ -148,7 +148,29 @@ var config = {
 		'finishedCountdownTimer': {
 			'play': '/sounds/notify-countdowntimer.mp3'
 		},
-		'default': {
+		// Reaction Sounds (users should provide actual sound files and paths)
+		// The keys (e.g., 'reaction_thumbup') must match the generated keys in notificationMiddleware.tsx
+		'reaction_thumbup' : {
+			'play' : '/sounds/notify.mp3', // Placeholder: e.g., /sounds/reaction-thumbup.mp3
+			'debounce' : 500 // ms; Adjust as needed
+		},
+		'reaction_thumbdown' : {
+			'play' : '/sounds/notify.mp3', // Placeholder: e.g., /sounds/reaction-thumbdown.mp3
+			'debounce' : 500
+		},
+		'reaction_clap' : {
+			'play' : '/sounds/notify-chat.mp3', // Placeholder: e.g., /sounds/reaction-clap.mp3
+			'debounce' : 1000
+		},
+		'reaction_party' : {
+			'play' : '/sounds/notify.mp3', // Placeholder: e.g., /sounds/reaction-party.mp3
+			'debounce' : 1000
+		},
+		'reaction_smile' : {
+			'play' : '/sounds/notify.mp3', // Placeholder: e.g., /sounds/reaction-smile.mp3
+			'debounce' : 500
+		},
+		'default': { // Default sound for other notifications not specified above
 			'debounce': 5000,
 			'play': '/sounds/notify.mp3'
 		}

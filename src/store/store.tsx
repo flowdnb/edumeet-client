@@ -40,6 +40,7 @@ import settingsSlice from './slices/settingsSlice';
 import peersSlice from './slices/peersSlice';
 import notificationsSlice from './slices/notificationsSlice';
 import uiSlice from './slices/uiSlice';
+import reactionsSlice from './slices/reactionsSlice'; // Import the new reducer
 import { EdumeetConfig } from '../utils/types';
 import edumeetConfig from '../utils/edumeetConfig';
 import { createContext } from 'react';
@@ -50,6 +51,7 @@ import type { Application } from '@feathersjs/feathers/lib';
 import { EffectsService } from '../services/effectsService';
 import { createClientMonitor } from '@observertc/client-monitor-js';
 import createEffectsMiddleware from './middlewares/effectsMiddleware';
+import createReactionsMiddleware from './middlewares/reactionsMiddleware'; // Import the new middleware
 import { ClientImageService } from '../services/clientImageService';
 
 declare global {
@@ -133,6 +135,7 @@ const reducer = combineReducers({
 	settings: settingsSlice.reducer,
 	signaling: signalingSlice.reducer,
 	ui: uiSlice.reducer,
+	reactions: reactionsSlice.reducer, // Add the new reducer
 });
 
 const pReducer = persistReducer<RootState>(persistConfig, reducer);
@@ -158,6 +161,7 @@ export const store = configureStore({
 			createNotificationMiddleware(middlewareOptions),
 			createEffectsMiddleware(middlewareOptions),
 			createCountdownTimerMiddleware(middlewareOptions),
+			createReactionsMiddleware(middlewareOptions), // Add the new middleware
 			...(edumeetConfig.reduxLoggingEnabled ? [ createLogger({
 				duration: true,
 				timestamp: false,

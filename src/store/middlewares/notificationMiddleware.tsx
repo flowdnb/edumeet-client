@@ -7,6 +7,7 @@ import { roomActions } from '../slices/roomSlice';
 import { notificationsActions } from '../slices/notificationsSlice';
 import { HTMLMediaElementWithSink } from '../../utils/types';
 import { settingsActions } from '../slices/settingsSlice';
+import { reactionsActions } from '../slices/reactionsSlice'; // Import reaction actions
 import { Logger } from '../../utils/Logger';
 
 interface SoundAlert {
@@ -108,6 +109,25 @@ const createNotificationMiddleware = ({
 
 			if (notificationsActions.playTestSound.match(action)) {
 				playNotificationSounds('default', true);
+			}
+
+			// Play sound for reactions
+			if (reactionsActions.setReaction.match(action)) {
+				const { reactionId, peerId } = action.payload;
+				const localPeerId = getState().me.id;
+
+				// Play sound for own reaction and for others' reactions.
+				// Debouncing will be handled by playNotificationSounds if configured.
+				// We construct a sound key like 'reaction_thumbup'
+				const soundKey = `reaction_${reactionId}`;
+				playNotificationSounds(soundKey);
+
+				// Optional: Log if the specific reaction sound wasn't found, falling back to default.
+				if (!soundAlerts[soundKey] && soundAlerts['default']) {
+					logger.debug(`Sound for reaction ${reactionId} not found, played default if available.`);
+				} else if (!soundAlerts[soundKey] && !soundAlerts['default']) {
+					logger.warn(`Sound for reaction ${reactionId} not found, and no default sound available.`);
+				}
 			}
 		}
 
