@@ -10,7 +10,6 @@ import FloatingMenu from '../floatingmenu/FloatingMenu';
 import { MenuItem } from '@mui/material'; // Using MenuItem directly for now
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { reactionsActions } from '../../store/slices/reactionsSlice';
-import { meSelector } from '../../store/selectors';
 
 // Define reaction types
 const reactionTypes = [
@@ -23,7 +22,7 @@ const reactionTypes = [
 
 const ReactionsButton = (props: ControlButtonProps): JSX.Element => {
 	const dispatch = useAppDispatch();
-	const me = useAppSelector(meSelector); // Get the current user's ID
+	const me = useAppSelector((state) => state.me);
 
 	const [ menuAnchorEl, setMenuAnchorEl ] = useState<HTMLElement | null>(null);
 	const isMenuOpen = Boolean(menuAnchorEl);

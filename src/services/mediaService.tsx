@@ -561,14 +561,14 @@ export class MediaService extends EventEmitter {
 
 									break;
 								}
-							case 'reaction': {
-								const { reactionId } = data;
+								case 'reaction': {
+									const { reactionId } = data;
 
-								if (reactionId) {
-									this.emit('reaction', peerId, reactionId);
+									if (reactionId) {
+										this.emit('reaction', peerId, reactionId);
+									}
+									break;
 								}
-								break;
-							}
 								default: {
 									logger.warn('unknown dataConsumer method "%s"', method);
 								}
@@ -1032,6 +1032,7 @@ export class MediaService extends EventEmitter {
 				this.dataProducers.set('reaction', reactionDataProducer); // Store it if we want to reuse
 			} catch (error) {
 				logger.error('Failed to create reaction DataProducer [error:%o]', error);
+				
 				return;
 			}
 		}

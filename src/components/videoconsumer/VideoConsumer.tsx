@@ -54,7 +54,7 @@ const reactionIcons: { [key: string]: JSX.Element } = {
 	smile: <SmileyIcon fontSize="inherit" style={{ color: 'white' }} />,
 };
 
-const REACTION_TIMEOUT_MS = 3000;
+const REACTION_TIMEOUT_MS = 10000;
 
 const VideoConsumer = ({ consumer, style }: VideoConsumerProps): JSX.Element => {
 	const dispatch = useAppDispatch();
@@ -84,6 +84,7 @@ const VideoConsumer = ({ consumer, style }: VideoConsumerProps): JSX.Element => 
 				dispatch(reactionsActions.clearReaction({ peerId }));
 			}
 		}
+		
 		return () => {
 			if (timeoutId) {
 				clearTimeout(timeoutId);

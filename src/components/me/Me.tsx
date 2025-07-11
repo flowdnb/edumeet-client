@@ -46,7 +46,7 @@ const reactionIcons: { [key: string]: JSX.Element } = {
 	smile: <SmileyIcon fontSize="inherit" style={{ color: 'white' }} />,
 };
 
-const REACTION_TIMEOUT_MS = 3000;
+const REACTION_TIMEOUT_MS = 10000;
 
 const Me = ({ style }: MeProps): React.JSX.Element => {
 	const dispatch = useAppDispatch();
@@ -76,6 +76,7 @@ const Me = ({ style }: MeProps): React.JSX.Element => {
 				dispatch(reactionsActions.clearReaction({ peerId: meId }));
 			}
 		}
+		
 		return () => {
 			if (timeoutId) {
 				clearTimeout(timeoutId);

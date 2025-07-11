@@ -35,7 +35,7 @@ const reactionsSlice = createSlice({
 });
 
 export const reactionsActions = reactionsSlice.actions;
-export default reactionsSlice.reducer;
+export default reactionsSlice;
 
 // Selectors
 export const selectReactionByPeerId = (state: RootState, peerId: string): ReactionInfo | undefined =>

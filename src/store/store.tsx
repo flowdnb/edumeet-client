@@ -40,7 +40,7 @@ import settingsSlice from './slices/settingsSlice';
 import peersSlice from './slices/peersSlice';
 import notificationsSlice from './slices/notificationsSlice';
 import uiSlice from './slices/uiSlice';
-import reactionsSlice from './slices/reactionsSlice'; // Import the new reducer
+import reactionsSlice from './slices/reactionsSlice';
 import { EdumeetConfig } from '../utils/types';
 import edumeetConfig from '../utils/edumeetConfig';
 import { createContext } from 'react';
@@ -51,7 +51,7 @@ import type { Application } from '@feathersjs/feathers/lib';
 import { EffectsService } from '../services/effectsService';
 import { createClientMonitor } from '@observertc/client-monitor-js';
 import createEffectsMiddleware from './middlewares/effectsMiddleware';
-import createReactionsMiddleware from './middlewares/reactionsMiddleware'; // Import the new middleware
+import createReactionsMiddleware from './middlewares/reactionsMiddleware';
 import { ClientImageService } from '../services/clientImageService';
 
 declare global {
@@ -161,7 +161,7 @@ export const store = configureStore({
 			createNotificationMiddleware(middlewareOptions),
 			createEffectsMiddleware(middlewareOptions),
 			createCountdownTimerMiddleware(middlewareOptions),
-			createReactionsMiddleware(middlewareOptions), // Add the new middleware
+			createReactionsMiddleware(middlewareOptions),
 			...(edumeetConfig.reduxLoggingEnabled ? [ createLogger({
 				duration: true,
 				timestamp: false,

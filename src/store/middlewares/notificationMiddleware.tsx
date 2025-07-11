@@ -113,13 +113,13 @@ const createNotificationMiddleware = ({
 
 			// Play sound for reactions
 			if (reactionsActions.setReaction.match(action)) {
-				const { reactionId, peerId } = action.payload;
-				const localPeerId = getState().me.id;
+				const { reactionId } = action.payload;
 
 				// Play sound for own reaction and for others' reactions.
 				// Debouncing will be handled by playNotificationSounds if configured.
 				// We construct a sound key like 'reaction_thumbup'
 				const soundKey = `reaction_${reactionId}`;
+
 				playNotificationSounds(soundKey);
 
 				// Optional: Log if the specific reaction sound wasn't found, falling back to default.
