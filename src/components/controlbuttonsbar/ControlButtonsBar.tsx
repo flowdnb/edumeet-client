@@ -18,6 +18,7 @@ import Transcription from '../menuitems/Transcription';
 import Filesharing from '../menuitems/Filesharing';
 import Recording from '../menuitems/Recording';
 import MoreButton from '../controlbuttons/MoreButton';
+import ReactionsButton from '../controlbuttons/ReactionsButton';
 
 interface ContainerProps {
 	height: string;
@@ -68,7 +69,8 @@ const ControlButtonsBar = (): JSX.Element => {
 				<MicButton offColor='error' toolTipLocation='bottom' />
 				<WebcamButton offColor='error' toolTipLocation='bottom' />
 				{ !isMobile && <ScreenshareButton toolTipLocation='bottom' /> }
-				{ !isMobile && <RaiseHandButton toolTipLocation='bottom' /> }
+        { !isMobile && <RaiseHandButton toolTipLocation='bottom' /> }
+				{ !isMobile && <ReactionsButton toolTipLocation='bottom' /> }
 				{ !isMobile && <ParticipantsButton toolTipLocation='bottom' onColor='primary' /> }
 				{ isMobile && <ParticipantsButton onClick={(event) => setParticipantAnchorEl(event.currentTarget)} toolTipLocation='bottom' /> }
 				{ !isMobile && chatEnabled && <ChatButton toolTipLocation='bottom' onColor='primary' /> }

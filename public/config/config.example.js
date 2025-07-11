@@ -148,7 +148,22 @@ var config = {
 		'finishedCountdownTimer': {
 			'play': '/sounds/notify-countdowntimer.mp3'
 		},
-		'default': {
+		'reaction_thumbup' : {
+			'play' : '/sounds/notify-thumbup.mp3',
+		},
+		'reaction_thumbdown' : {
+			'play' : '/sounds/notify-thumbdown.mp3',
+		},
+		'reaction_clap' : {
+			'play' : '/sounds/notify-clap.mp3',
+		},
+		'reaction_party' : {
+			'play' : '/sounds/notify-party.mp3',
+		},
+		'reaction_smile' : {
+			'play' : '/sounds/notify-smile.mp3',
+		},
+		'default': { // Default sound for other notifications not specified above
 			'debounce': 5000,
 			'play': '/sounds/notify.mp3'
 		}
